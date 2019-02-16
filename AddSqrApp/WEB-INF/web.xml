@@ -1,0 +1,18 @@
+<web-app>
+	<servlet>
+		<servlet-name>xyz</servlet-name>
+		<servlet-class>Add</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>xyz</servlet-name>
+		<url-pattern>/abc</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>pqr</servlet-name>
+		<servlet-class>Square</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>pqr</servlet-name>
+		<url-pattern>/sqr</url-pattern>
+	</servlet-mapping>
+</web-app>
