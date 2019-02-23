@@ -1,0 +1,32 @@
+<web-app>
+	<context-param>
+		<param-name>Cname</param-name>
+		<param-value>Incapp</param-value>
+	</context-param>
+	
+	<servlet>
+		<servlet-name>Servlet1</servlet-name>
+		<servlet-class>Servlet1</servlet-class>
+		<init-param>
+			<param-name>Email</param-name>
+			<param-value>xyz@gmail.com</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Servlet1</servlet-name>
+		<url-pattern>/s1</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Servlet2</servlet-name>
+		<servlet-class>Servlet2</servlet-class>
+		<init-param>
+			<param-name>Email</param-name>
+			<param-value>abc@gmail.com</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Servlet2</servlet-name>
+		<url-pattern>/s2</url-pattern>
+	</servlet-mapping>
+</web-app>
