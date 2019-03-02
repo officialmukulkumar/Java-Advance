@@ -11,15 +11,23 @@ public class Login extends HttpServlet{
 			out=res.getWriter();
 			String e= req.getParameter("email");
 			String p= req.getParameter("pass");
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
-			"jdbc:mysql://localhost:3306/loginlogout","root","incapp");
+			ServletContext ctx = getServletContext();
+			String driver = ctx.getInitParameter("driver");
+			String path = ctx.getInitParameter("path");
+			String id = ctx.getInitParameter("id");
+			String pass = ctx.getInitParameter("pass");
+			Class.forName(driver);
+			Connection con = DriverManager.getConnection(path,id,pass);
 			Statement st = con.createStatement();
 			ResultSet rs=st.executeQuery(
 			"select * from user_info where Email = '"+e+"' and Password = '"+p+"'");
 			if(rs.next()){
-				RequestDispatcher rd=req.getRequestDispatcher("Profile");
-				rd.forward(req,res);
+				HttpSession hs = req.getSession();
+				hs.setAttribute("email",rs.getString("Email"));
+				hs.setAttribute("name",rs.getString("Name"));
+				hs.setAttribute("phone",rs.getString("Phone"));
+				hs.setAttribute("age",rs.getInt("Age"));
+				res.sendRedirect("Profile");
 			}else{
 				res.sendRedirect("loginerror.html");
 			}			

@@ -12,15 +12,22 @@ public class Register extends HttpServlet{
 			String ph= req.getParameter("phone");
 			int a= Integer.parseInt(req.getParameter("age"));
 			String p= req.getParameter("pass");
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
-			"jdbc:mysql://localhost:3306/loginlogout","root","incapp");
+			ServletContext ctx = getServletContext();
+			String driver = ctx.getInitParameter("driver");
+			String path = ctx.getInitParameter("path");
+			String id = ctx.getInitParameter("id");
+			String pass = ctx.getInitParameter("pass");
+			Class.forName(driver);
+			Connection con = DriverManager.getConnection(path,id,pass);
 			Statement st = con.createStatement();
 			st.executeUpdate(
 			"insert into user_info values ('"+e+"','"+n+"','"+ph+"',"+a+",'"+p+"')");
-			RequestDispatcher rd=req.getRequestDispatcher("Profile");
-				rd.forward(req,res);
-
+			HttpSession hs=req.getSession();
+			hs.setAttribute("name",n);
+			hs.setAttribute("email",e);
+			hs.setAttribute("phone",ph);
+			hs.setAttribute("age",a);
+			res.sendRedirect("Profile");
 		}
 		catch(SQLIntegrityConstraintViolationException ex){
 			res.sendRedirect("registererror2.html");
