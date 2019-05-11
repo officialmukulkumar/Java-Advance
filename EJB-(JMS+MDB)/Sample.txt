@@ -1,0 +1,11 @@
+TextMessage tm = (TextMessage)message;
+try{
+	System.out.println("message: " tm.getText());
+	
+
+}catch(JMSException ex){
+
+
+	System.out.println(ex);
+
+}
